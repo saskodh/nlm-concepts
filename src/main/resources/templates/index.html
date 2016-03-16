@@ -16,11 +16,29 @@
     <script src="script.js"></script>
 </head>
 
-<body>
+<body ng-app="app">
     <div class="container">
         <div class="page-header">
-            <h1>Spring Boot Heroku Example</h1>
-            <p class="lead">Demo application for showing how to run a <a href="http://projects.spring.io/spring-boot/">Spring Boot</a> application on <a href="https://heroku.com">Heroku</a>.</p>
+            <h1>Medical text indexer POC</h1>
+            <p class="lead">Proof-of-concept for highlighting medical terms in given text using <a href="https://ii.nlm.nih.gov/Interactive/mti.shtml">NLM MTI</a>.</p>
+        </div>
+        <div class="content" ng-controller="MainController">
+            <div class="text-input">
+                <textarea ng-model="textContent"
+                          placeholder="Paste the text for processing here..">
+                </textarea>
+                <button class="btn btn-success"
+                        ng-click="processText(textContent)"
+                        ng-disabled="!textContent">Submit</button>
+            </div>
+            <div class="results">
+                <p class="spinner" ng-if="showSpinner">Loading...</p>
+                <div ng-if="!showSpinner">
+                    <div ng-if="results">{{ results }}</div>
+                    <p ng-if="!results">No matches found.</p>
+                    <p class="error" ng-if="error">{{ errors }}</p>
+                </div>
+            </div>
         </div>
     </div>
 </body>
