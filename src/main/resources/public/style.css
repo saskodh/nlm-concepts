@@ -8,29 +8,61 @@ html, body {
     flex-direction: column;
 }
 
-.content {
-    display: flex;
-    flex: 1;
+.nlm-jobs {
     padding-bottom: 50px;
 }
 
-.text-input {
-    flex: 1;
+.nlm-jobs-tab {
+    flex-direction: column;
+}
+
+.nlm-jobs,
+.nlm-jobs-tab,
+.nlm-jobs-tab .tab-content,
+.nlm-jobs-tab .tab-content .tab-pane.active,
+[nlm-job],
+.content,
+.text-input,
+.results,
+.results > div {
     display: flex;
+    flex: 1;
+}
+
+.tab-pane {
+    padding-top: 20px;
+}
+
+.text-input {
     flex-direction: column;
     padding-right: 20px;
 }
+.text-input button {
+    min-height: 34px;
+}
 
-.text-input textarea {
+.text-input textarea, .text-input > div {
     flex: 1;
     margin-bottom: 20px;
 }
+.text-input > div {
+    overflow: auto;
+}
 
-.results {
-    flex: 1;
-    display: flex;
+.results > div {
+    flex-direction: column;
+    overflow: auto;
+}
+
+.panel-group {
+    margin-bottom: 0;
 }
 
 .results > {
     flex: 1;
+}
+
+.highlighted {
+    background-color: rgba(0, 0, 0, 0.15);
+    cursor: pointer;
 }

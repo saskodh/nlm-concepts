@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="text-input" ng-form="form">
+        <p ng-if="form.$invalid" class="alert alert-danger">Text cannot be longer than 10'000 characters</p>
+        <textarea ng-show="editMode" name="textContent" ng-model="job.textContent"
+                  placeholder="Paste the text for processing here.." ng-maxlength="10000">
+        </textarea>
+        <div ng-show="!editMode" class="highlighted-text"></div>
+        <button class="btn btn-success" ng-if="editMode"
+                ng-click="processText(job.textContent)" ng-disabled="!job.textContent || form.$invalid"
+                title="Submit for processing">
+            <span>Submit</span>
+        </button>
+        <button class="btn btn-success" ng-if="!editMode" ng-click="setEditable()"
+                title="Edit the current text">
+            <span>Edit</span>
+        </button>
+    </div>
+    <div class="results">
+        <p class="spinner" ng-if="showSpinner">Loading...</p>
+        <div ng-if="!showSpinner">
+            <p ng-if="!results">No matches found.</p>
+            <p class="error" ng-if="error">{{ errors }}</p>
+            <div ng-if="results">
+                <div uib-accordion close-others="true">
+                    <div uib-accordion-group ng-repeat="result in results" is-open="result.isOpen">
+                        <div uib-accordion-heading>
+                            <span ng-click="loadConceptData(result)">{{result.term}}</span>
+                            <i class="pull-right glyphicon" ng-click="loadConceptData(result)"
+                               ng-class="{'glyphicon-chevron-down': result.isOpen, 'glyphicon-chevron-right': !result.isOpen}">
+                            </i>
+                        </div>
+                        <div ng-if="result.dataLoadState === 'loaded'">
+                            <h4>{{result.data.label.value}}</h4>
+                            <p>{{result.data.scopeNote.value}}</p>
+                        </div>
+                        <div ng-if="result.dataLoadState === 'loading'">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
